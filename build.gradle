@@ -1,0 +1,24 @@
+import static java.lang.Integer.parseInt
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+group = projectGroupId
+version = projectVersion
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(parseInt(javaVersion))
+}

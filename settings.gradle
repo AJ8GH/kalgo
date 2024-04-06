@@ -1,0 +1,12 @@
+pluginManagement {
+  plugins {
+    id 'org.jetbrains.kotlin.jvm' version kotlinPluginVersion
+    id 'org.gradle.toolchains.foojay-resolver-convention' version resolverConventionPluginVersion
+  }
+}
+
+plugins {
+  id 'org.gradle.toolchains.foojay-resolver-convention'
+}
+
+rootProject.name = 'kalgos'
