@@ -1,4 +1,7 @@
 package io.github.aj8gh.kalgo.algorithm.binarytree
 
-class InvertBinaryTree {
+import io.github.aj8gh.kalgo.model.BinaryTreeNode
+
+fun <T> invert(input: BinaryTreeNode<T>): BinaryTreeNode<T> {
+  return input
 }

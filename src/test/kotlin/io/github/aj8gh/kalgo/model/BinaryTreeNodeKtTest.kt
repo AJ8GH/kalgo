@@ -10,7 +10,7 @@ class BinaryTreeNodeKtTest {
   @ParameterizedTest
   @MethodSource("params")
   fun from(input: List<Int>, expected: BinaryTreeNode<Int>) =
-    assertEquals(expected, from(input))
+    assertEquals(expected, binaryTreeFrom(input))
 
   companion object {
 
@@ -20,32 +20,23 @@ class BinaryTreeNodeKtTest {
         listOf(1),
         leafNodeOf(1)
       ),
+
       Arguments.of(
-        listOf(
-          1,
-          2, 3
-        ),
+        listOf(1, 2, 3),
         BinaryTreeNode(1, leafNodeOf(2), leafNodeOf(3)),
       ),
+
       Arguments.of(
-        listOf(
-          1,
-          2, 3,
-          4, 5, 6, 7
-        ),
+        listOf(1, 2, 3, 4, 5, 6, 7),
         BinaryTreeNode(
           1,
           BinaryTreeNode(2, leafNodeOf(4), leafNodeOf(5)),
           BinaryTreeNode(3, leafNodeOf(6), leafNodeOf(7)),
         ),
       ),
+
       Arguments.of(
-        listOf(
-          1,
-          2, 3,
-          4, 5, 6, 7,
-          8, 9, 10, 11, 12, 13, 14, 15
-        ),
+        listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15),
         BinaryTreeNode(
           1,
           BinaryTreeNode(
@@ -59,6 +50,32 @@ class BinaryTreeNodeKtTest {
             BinaryTreeNode(7, leafNodeOf(14), leafNodeOf(15)),
           ),
         ),
+      ),
+
+      Arguments.of(
+        listOf(1, 2),
+        BinaryTreeNode(1, leafNodeOf(2))
+      ),
+
+      Arguments.of(
+        listOf(1, 2, null, 4, null),
+        BinaryTreeNode(1, BinaryTreeNode(2, leafNodeOf(4)))
+      ),
+
+      Arguments.of(
+        listOf(1, 2, null, null, 5, 6, 7, null, 9, null, 11),
+        BinaryTreeNode(
+          1,
+          BinaryTreeNode(
+            2,
+            null,
+            BinaryTreeNode(
+              5,
+              BinaryTreeNode(6, null, leafNodeOf(9)),
+              BinaryTreeNode(7, null, leafNodeOf(11))
+            )
+          )
+        )
       ),
     )
   }
