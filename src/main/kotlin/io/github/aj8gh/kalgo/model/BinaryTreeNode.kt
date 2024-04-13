@@ -1,28 +1,42 @@
 package io.github.aj8gh.kalgo.model
 
+import java.util.*
+import java.util.function.Consumer
+import kotlin.collections.ArrayDeque
+
 data class BinaryTreeNode<T>(
   val value: T,
   var left: BinaryTreeNode<T>? = null,
   var right: BinaryTreeNode<T>? = null,
-)
+) {
+  fun setLeft(node: BinaryTreeNode<T>) = apply { left = node }
+  fun setRight(node: BinaryTreeNode<T>) = apply { right = node }
+}
+
+fun <T> leafNodeOf(value: T) = BinaryTreeNode(value)
 
 fun <T> binaryTreeFrom(values: List<T>): BinaryTreeNode<T> {
   val root = BinaryTreeNode(values[0])
   val nodes = ArrayDeque(listOf(root))
   for (i in values.indices step 2) {
     val currentRoot = nodes.removeFirstOrNull() ?: continue
-    if (i + 1 < values.size) {
-      val value = values[i + 1]
-      currentRoot.left = if (value == null) null else leafNodeOf(value)
-      currentRoot.left?.let { nodes.add(it) }
-    }
-    if (i + 2 < values.size) {
-      val value = values[i + 2]
-      currentRoot.right = if (value == null) null else leafNodeOf(value)
-      currentRoot.right?.let { nodes.add(it) }
-    }
+    updateNode(i + 1, values, nodes, currentRoot::setLeft)
+    updateNode(i + 2, values, nodes, currentRoot::setRight)
   }
   return root
 }
 
-fun <T> leafNodeOf(value: T) = BinaryTreeNode(value)
+private fun <T> updateNode(
+  index: Int,
+  values: List<T>,
+  nodes: ArrayDeque<BinaryTreeNode<T>>,
+  consumer: Consumer<BinaryTreeNode<T>>,
+) {
+  if (index < values.size) {
+    values[index]?.apply {
+      val node: BinaryTreeNode<T> = leafNodeOf(this)
+      consumer.accept(node)
+      nodes.add(node)
+    }
+  }
+}
