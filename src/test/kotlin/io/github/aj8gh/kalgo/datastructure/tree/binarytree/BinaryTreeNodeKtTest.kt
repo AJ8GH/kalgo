@@ -1,5 +1,6 @@
-package io.github.aj8gh.kalgo.model
+package io.github.aj8gh.kalgo.datastructure.tree.binarytree
 
+import io.github.aj8gh.kalgo.testutils.ARGUMENTS
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
@@ -8,14 +9,14 @@ import kotlin.test.assertEquals
 class BinaryTreeNodeKtTest {
 
   @ParameterizedTest
-  @MethodSource("params")
+  @MethodSource(ARGUMENTS)
   fun from(input: List<Int>, expected: BinaryTreeNode<Int>) =
     assertEquals(expected, binaryTreeFrom(input))
 
   companion object {
 
     @JvmStatic
-    private fun params() = listOf(
+    private fun arguments() = listOf(
       Arguments.of(
         listOf(1),
         leafNodeOf(1)

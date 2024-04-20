@@ -1,16 +1,16 @@
-package io.github.aj8gh.kalgo.model
+package io.github.aj8gh.kalgo.datastructure.tree.binarytree
 
-import java.util.*
 import java.util.function.Consumer
-import kotlin.collections.ArrayDeque
 
 data class BinaryTreeNode<T>(
   val value: T,
   var left: BinaryTreeNode<T>? = null,
   var right: BinaryTreeNode<T>? = null,
 ) {
-  fun setLeft(node: BinaryTreeNode<T>) = apply { left = node }
-  fun setRight(node: BinaryTreeNode<T>) = apply { right = node }
+  fun setLeft(node: BinaryTreeNode<T>?) = apply { left = node }
+  fun setRight(node: BinaryTreeNode<T>?) = apply { right = node }
+  fun hasLeft() = left != null
+  fun hasRight() = right != null
 }
 
 fun <T> leafNodeOf(value: T) = BinaryTreeNode(value)
