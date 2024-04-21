@@ -6,7 +6,7 @@ import java.util.function.Consumer
 fun <T> invert(input: BinaryTreeNode<T>): BinaryTreeNode<T> {
   val nodes = ArrayDeque(listOf(input))
   while (nodes.isNotEmpty()) {
-    val current = nodes.removeFirstOrNull() ?: continue
+    val current = nodes.removeFirst()
     val right = current.right
     invert(current.left, current::setRight, nodes)
     invert(right, current::setLeft, nodes)
